@@ -156,19 +156,18 @@ In this Workshop you will practice how to migrate your MS SQL DB databases to Am
 
       - Log In to the EC2 server.
         1. To get the Administrator password, Use the SSH key from the SSM Parameter Store.
-      - On the EC2 server, open the _DMS Workshop_ folder that is on the Desktop. Then, double-click on _AWS Schema Conversion Tool_ Download to get the latest version of the software.
-        - Continue with the installation
-          | Parameter | Value |
-          | - | - |
-          | Project Name | AWS Schema Conversion Tool SQL Server to Aurora MySQL |
-          | Location | C:\Users\Administrator\AWS Schema Conversion Tool |
-          | Database Type | Transactional Database (OLTP) |
-          | Source Database Engine | Microsoft SQL Server / I want to switch engines and optimize for the cloud |
+      - On the EC2 server, open the _DMS Workshop_ folder that is on the Desktop. Then, double-click on _AWS Schema Conversion Tool_ Download to get the latest version of the software. - Continue with the installation
+        | Parameter | Value |
+        | ---------------------- | -------------------------------------------------------------------------- |
+        | Project Name | AWS Schema Conversion Tool SQL Server to Aurora MySQL |
+        | Location | C:\Users\Administrator\AWS Schema Conversion Tool |
+        | Database Type | Transactional Database (OLTP) |
+        | Source Database Engine | Microsoft SQL Server / I want to switch engines and optimize for the cloud |
       - Continue to **Next**
-        - Use the values
+        - Use these values
           | Parameter | Value |
-          | - | - |
-          | Project | Name localhost |
+          | -------------------------------- | ------------------------------------------------------------------------------------------ |
+          | Project Name | localhost |
           | Server | Port 1433 |
           | Instance Name | |
           | Authentication | SQL Server Authentication |
@@ -186,7 +185,7 @@ In this Workshop you will practice how to migrate your MS SQL DB databases to Am
         - ![Miztiik Automation: Database Migration - MS SQL DB to Amazon Aurora DB](images/miztiik_architecture_mssql_to_aurora_05.png)
       - Review the database migration assessment report, click **Next**. Specify the target database configurations in the form, and then click Test Connection. Once the connection is successfully tested, click **Finish**.
         | Parameter | Value |
-        | - | - |
+        | ----------------- | ---------------------------------------------------------------------------------- |
         | Target | Database Engine Amazon Aurora (MySQL compatible) |
         | Server | Name < TargetAuroraMySQLEndpoint > |
         | Server | Port 3306 |
@@ -196,7 +195,7 @@ In this Workshop you will practice how to migrate your MS SQL DB databases to Am
         | Store Password | Checked |
         | MySQL Driver Path | `C:\Users\Administrator\Desktop\DMS Workshop\JDBC\mysql-connector-java-8.0.16.jar` |
 
-        - ![Miztiik Automation: Database Migration - MS SQL DB to Amazon Aurora DB](images/miztiik_architecture_mssql_to_aurora_06.png)
+          - ![Miztiik Automation: Database Migration - MS SQL DB to Amazon Aurora DB](images/miztiik_architecture_mssql_to_aurora_06.png)
 
       - Now that you have created a new Database Migration Project, the next step is to convert the SQL Server schema of the source database to the Amazon Aurora. Click on the _View_ button, and choose **Assessment Report view**.
         - ![Miztiik Automation: Database Migration - MS SQL DB to Amazon Aurora DB](images/miztiik_architecture_mssql_to_aurora_07.png)
