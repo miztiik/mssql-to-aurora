@@ -173,8 +173,8 @@ In this Workshop you will practice how to migrate your MS SQL DB databases to Am
           | Authentication | SQL Server Authentication |
           | User Name | awssct |
           | Password | Password1 |
-          | Use | SSL Unchecked |
-          | Store | Password Checked |
+          | Use SSL | Unchecked |
+          | Store Password | Checked |
           | Microsoft SQL Server Driver Path | C:\Users\Administrator\Desktop\DMS Workshop\JDBC\sqljdbc_7.4\enu\mssql-jdbc-7.4.1.jre8.jar |
       - You may see a security warning prompot to use SSL. Click on “Accept the Risk and continue” button.
         - ![Miztiik Automation: Database Migration - MS SQL DB to Amazon Aurora DB](images/miztiik_architecture_mssql_to_aurora_03.png)
@@ -195,7 +195,7 @@ In this Workshop you will practice how to migrate your MS SQL DB databases to Am
         | Store Password | Checked |
         | MySQL Driver Path | `C:\Users\Administrator\Desktop\DMS Workshop\JDBC\mysql-connector-java-8.0.16.jar` |
 
-          - ![Miztiik Automation: Database Migration - MS SQL DB to Amazon Aurora DB](images/miztiik_architecture_mssql_to_aurora_06.png)
+        - ![Miztiik Automation: Database Migration - MS SQL DB to Amazon Aurora DB](images/1433miztiik_architecture_mssql_to_aurora_06_new.png)
 
       - Now that you have created a new Database Migration Project, the next step is to convert the SQL Server schema of the source database to the Amazon Aurora. Click on the _View_ button, and choose **Assessment Report view**.
         - ![Miztiik Automation: Database Migration - MS SQL DB to Amazon Aurora DB](images/miztiik_architecture_mssql_to_aurora_07.png)
