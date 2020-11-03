@@ -1,8 +1,8 @@
 # Migrate your Microsoft SQL Database TO Amazon Aurora
 
-Mystique Unicorn App backend is hosted on mysql db. Recenly one of their devs discovered that AWS offers Amazon Aurora a fast, scalable, highly available, and fully managed relational database service that supports MySQL workloads.
+Mystique Unicorn App backend is hosted on Microsoft SQL Server. Recenly one of their devs discovered that AWS offers Amazon Aurora a fast, scalable, highly available, and fully managed relational database service that supports MySQL workloads.
 
-Can you help them migrate from mysql hosted on prem(or EC2) to Amazon Aurora?
+Can you help them migrate from mssql hosted on prem(or EC2) to Amazon Aurora?
 
 ## 🎯 Solutions
 
@@ -23,7 +23,7 @@ We will follow an multi-stage process to accomplish our goal. We need the follow
 
 ![Miztiik Automation: Database Migration - MS SQL DB to Amazon Aurora DB](images/miztiik_architecture_mssql_to_aurora_01.png)
 
-In this article, we will build an architecture, similar to the one shown above - A simple database running mysql(mariadb 10.2.x) instance running on EC2 _(You are welcome to use your own mysqldb instead_). For target we will build a Amazon Aurora DB cluster and use DMS to migrate the data.
+In this article, we will build an architecture, similar to the one shown above - A simple database running mssql instance running on EC2 _(You are welcome to use your own ms sqldb instead_). For target we will build a Amazon Aurora DB cluster and use DMS to migrate the data.
 
 In this Workshop you will practice how to migrate your MS SQL DB databases to Amazon Aurora DB using different strategies.
 
