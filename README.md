@@ -1,4 +1,4 @@
-# Migrate your MySQL Database TO Amazon Aurora
+# Migrate your Microsoft SQL Database TO Amazon Aurora
 
 Mystique Unicorn App backend is hosted on mysql db. Recenly one of their devs discovered that AWS offers Amazon Aurora a fast, scalable, highly available, and fully managed relational database service that supports MySQL workloads.
 
