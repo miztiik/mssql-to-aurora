@@ -157,25 +157,30 @@ In this Workshop you will practice how to migrate your MS SQL DB databases to Am
       - Log In to the EC2 server.
         1. To get the Administrator password, Use the SSH key from the SSM Parameter Store.
       - On the EC2 server, open the _DMS Workshop_ folder that is on the Desktop. Then, double-click on _AWS Schema Conversion Tool_ Download to get the latest version of the software. - Continue with the installation
-        | Parameter | Value |
+
+        | Parameter              | Value                                                                      |
         | ---------------------- | -------------------------------------------------------------------------- |
-        | Project Name | AWS Schema Conversion Tool SQL Server to Aurora MySQL |
-        | Location | C:\Users\Administrator\AWS Schema Conversion Tool |
-        | Database Type | Transactional Database (OLTP) |
+        | Project Name           | AWS Schema Conversion Tool SQL Server to Aurora MySQL                      |
+        | Location               | C:\Users\Administrator\AWS Schema Conversion Tool                          |
+        | Database Type          | Transactional Database (OLTP)                                              |
         | Source Database Engine | Microsoft SQL Server / I want to switch engines and optimize for the cloud |
+
       - Continue to **Next**
+
         - Use these values
-          | Parameter | Value |
-          | -------------------------------- | ------------------------------------------------------------------------------------------ |
-          | Project Name | localhost |
-          | Server | Port 1433 |
-          | Instance Name | |
-          | Authentication | SQL Server Authentication |
-          | User Name | awssct |
-          | Password | Password1 |
-          | Use SSL | Unchecked |
-          | Store Password | Checked |
-          | Microsoft SQL Server Driver Path | C:\Users\Administrator\Desktop\DMS Workshop\JDBC\sqljdbc_7.4\enu\mssql-jdbc-7.4.1.jre8.jar |
+
+          | Parameter                        | Value                                                                                        |
+          | -------------------------------- | -------------------------------------------------------------------------------------------- |
+          | Project Name                     | localhost                                                                                    |
+          | Server Port                      | 1433                                                                                         |
+          | Instance Name                    |                                                                                              |
+          | Authentication                   | SQL Server Authentication                                                                    |
+          | User Name                        | `awssct`                                                                                     |
+          | Password                         | `Password1`                                                                                  |
+          | Use SSL                          | Unchecked                                                                                    |
+          | Store Password                   | Checked                                                                                      |
+          | Microsoft SQL Server Driver Path | `C:\Users\Administrator\Desktop\DMS Workshop\JDBC\sqljdbc_7.4\enu\mssql-jdbc-7.4.1.jre8.jar` |
+
       - You may see a security warning prompot to use SSL. Click on “Accept the Risk and continue” button.
         - ![Miztiik Automation: Database Migration - MS SQL DB to Amazon Aurora DB](images/miztiik_architecture_mssql_to_aurora_03.png)
       - Select the `dms_sample` database, then click Next.
@@ -184,16 +189,17 @@ In this Workshop you will practice how to migrate your MS SQL DB databases to Am
       - SCT will examine in detail all of the objects in the schema of source database. It will convert as much as possible automatically and provides detailed information about items it could not convert. Generally, packages, procedures, and functions are more likely to have some issues to resolve because they contain the most custom or proprietary SQL code. AWS SCT specifies how much manual change is needed to convert each object type. It also provides hints about how to adapt these objects to the target schema successfully.
         - ![Miztiik Automation: Database Migration - MS SQL DB to Amazon Aurora DB](images/miztiik_architecture_mssql_to_aurora_05.png)
       - Review the database migration assessment report, click **Next**. Specify the target database configurations in the form, and then click Test Connection. Once the connection is successfully tested, click **Finish**.
-        | Parameter | Value |
-        | ----------------- | ---------------------------------------------------------------------------------- |
-        | Target | Database Engine Amazon Aurora (MySQL compatible) |
-        | Server | Name < TargetAuroraMySQLEndpoint > |
-        | Server | Port 3306 |
-        | User Name | auroraadmin |
-        | Password | YOUR_PASSWORD |
-        | Use | SSL Unchecked |
-        | Store Password | Checked |
-        | MySQL Driver Path | `C:\Users\Administrator\Desktop\DMS Workshop\JDBC\mysql-connector-java-8.0.16.jar` |
+
+        | Parameter              | Value                                                                              |
+        | ---------------------- | ---------------------------------------------------------------------------------- |
+        | Target Database Engine | Amazon Aurora (MySQL compatible)                                                   |
+        | Server Name            | < TargetAuroraMySQLEndpoint >                                                      |
+        | Server                 | Port 3306                                                                          |
+        | User Name              | auroraadmin                                                                        |
+        | Password               | YOUR_PASSWORD                                                                      |
+        | Use                    | SSL Unchecked                                                                      |
+        | Store Password         | Checked                                                                            |
+        | MySQL Driver Path      | `C:\Users\Administrator\Desktop\DMS Workshop\JDBC\mysql-connector-java-8.0.16.jar` |
 
         - ![Miztiik Automation: Database Migration - MS SQL DB to Amazon Aurora DB](images/miztiik_architecture_mssql_to_aurora_06_new.png)
 
@@ -258,13 +264,13 @@ In this Workshop you will practice how to migrate your MS SQL DB databases to Am
 
       - Open **MySQL Workbench CE** from within the EC2 server, and create a new database connection for the target Aurora database using the following values:
 
-        | Parameter  | Value                          |
-        | ---------- | ------------------------------ |
-        | Connection | Name Target Aurora RDS (MySQL) |
-        | Host Name  | <TargetAuroraMySQLEndpoint>    |
-        | Port       | 3306                           |
-        | Username   | auroraadmin                    |
-        | Password   | YOUR_PASSWORD                  |
+        | Parameter       | Value                       |
+        | --------------- | --------------------------- |
+        | Connection Name | Target Aurora RDS (MySQL)   |
+        | Host Name       | <TargetAuroraMySQLEndpoint> |
+        | Port            | 3306                        |
+        | Username        | `auroraadmin`               |
+        | Password        | YOUR_PASSWORD               |
 
         - ![Miztiik Automation: Database Migration - MS SQL DB to Amazon Aurora DB](images/miztiik_architecture_mssql_to_aurora_15.png)
 
@@ -294,25 +300,25 @@ In this Workshop you will practice how to migrate your MS SQL DB databases to Am
 
     - **Endpoints for source MS SQL DB**(_custom values listed below_)
 
-      | Parameter           | Value                                            |
-      | ------------------- | ------------------------------------------------ |
-      | Endpoint            | Type Source endpoint                             |
-      | Endpoint Identifier | `sqlserver-source`                               |
-      | Source Engine       | `sqlserver`                                      |
-      | Server Name         | < SourceEC2PrivateDns >                          |
-      | Port                | 1433                                             |
-      | SSL Mode            | none                                             |
-      | User Name           | `awssct`                                         |
-      | Password            | `Password1`                                      |
-      | Database Name       | `dms_sample`                                     |
-      | Test                | endpoint connection -> VPC `miztiikMigrationVpc` |
-      | Replication         | Instance DMSReplication                          |
+      | Parameter            | Value                                            |
+      | -------------------- | ------------------------------------------------ |
+      | Endpoint Type        | Source endpoint                                  |
+      | Endpoint Identifier  | `sqlserver-source`                               |
+      | Source Engine        | `sqlserver`                                      |
+      | Server Name          | < SourceEC2PrivateDns >                          |
+      | Port                 | 1433                                             |
+      | SSL Mode             | none                                             |
+      | User Name            | `awssct`                                         |
+      | Password             | `Password1`                                      |
+      | Database Name        | `dms_sample`                                     |
+      | Test                 | endpoint connection -> VPC `miztiikMigrationVpc` |
+      | Replication Instance | DMSReplication                                   |
 
     - **Endpoint for destination databases - Amazon Aurora DB**(_custom values listed below_)
 
       | Parameter            | Value                                            |
       | -------------------- | ------------------------------------------------ |
-      | Endpoint             | Type Target endpoint                             |
+      | Endpoint Type        | Target endpoint                                  |
       | Select               | RDS DB instance                                  |
       | Endpoint Identifier  | `aurora-target`                                  |
       | Source Engine        | aurora                                           |
@@ -320,7 +326,7 @@ In this Workshop you will practice how to migrate your MS SQL DB databases to Am
       | Port                 | 3306                                             |
       | SSL Mode             | none                                             |
       | User Name            | `auroraadmin`                                    |
-      | Password             | `Password1`                                      |
+      | Password             | YOUR_PASSWORD                                    |
       | Test                 | endpoint connection -> VPC `miztiikMigrationVpc` |
       | Replication Instance | DMSReplication                                   |
 
@@ -362,10 +368,10 @@ In this Workshop you will practice how to migrate your MS SQL DB databases to Am
 
     - Connect to Aurora from MySQL WorkBench and query for data,
 
-    ```sql
-    SELECT *
-    FROM dms_sample_dbo.sport_type;
-    ```
+      ```sql
+      SELECT *
+      FROM dms_sample_dbo.sport_type;
+      ```
 
     - **AFTER** initial load is completed, use the following script to enable the foreign key constraints that we dropped earlier:
       1. Within MySQL Workbench, click on the File menu, and choose New Query Tab.
@@ -378,18 +384,18 @@ In this Workshop you will practice how to migrate your MS SQL DB databases to Am
     - Use Microsoft SQL Server Management Studio to connect to the Source SQL Server on the EC2 instance.
     - Open a New Query window and execute the following statement to insert 5 new sports into the `sport_type` table:
 
-    ```sql
-    use dms_sample
-    BULK INSERT dbo.sport_type
-    FROM 'C:\Users\Administrator\Desktop\DMS Workshop\Scripts\sports.csv'
-    WITH
-    (
-        FIRSTROW = 2,
-        FIELDTERMINATOR = ',',
-        ROWTERMINATOR = '\n',
-        TABLOCK
-    );
-    ```
+      ```sql
+      use dms_sample
+      BULK INSERT dbo.sport_type
+      FROM 'C:\Users\Administrator\Desktop\DMS Workshop\Scripts\sports.csv'
+      WITH
+      (
+          FIRSTROW = 2,
+          FIELDTERMINATOR = ',',
+          ROWTERMINATOR = '\n',
+          TABLOCK
+      );
+      ```
 
     - Connect to target DB from MySQL Workbench & check for new records,
 
@@ -448,7 +454,7 @@ This repository aims to teach api best practices to new developers, Solution Arc
 
 ### 💡 Help/Suggestions or 🐛 Bugs
 
-Thank you for your interest in contributing to our project. Whether it's a bug report, new feature, correction, or additional documentation or solutions, we greatly value feedback and contributions from our community. [Start here][200]
+Thank you for your interest in contributing to our project. Whether it's a bug report, new feature, correction, or additional documentation or solutions, we greatly value feedback and contributions from our community. [Start here](/issues)
 
 ### 👋 Buy me a coffee
 
@@ -472,7 +478,6 @@ Thank you for your interest in contributing to our project. Whether it's a bug r
 [101]: https://www.udemy.com/course/aws-cloud-security-proactive-way/?referralCode=71DC542AD4481309A441
 [102]: https://www.udemy.com/course/aws-cloud-development-kit-from-beginner-to-professional/?referralCode=E15D7FB64E417C547579
 [103]: https://www.udemy.com/course/aws-cloudformation-basics?referralCode=93AD3B1530BC871093D6
-[200]: https://github.com/miztiik/api-with-stage-variables/issues
 [899]: https://www.udemy.com/user/n-kumar/
 [900]: https://ko-fi.com/miztiik
 [901]: https://ko-fi.com/Q5Q41QDGK
