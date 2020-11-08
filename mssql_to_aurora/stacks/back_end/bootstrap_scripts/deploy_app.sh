@@ -12,7 +12,7 @@ set -o pipefail
 # /var/lib/cloud/instance/scripts/part-001:
 # /var/log/user-data.log
 
-REPO_NAME="dms-mongodb-to-documentdb"
+REPO_NAME="mssql_to_aurora"
 
 GIT_REPO_URL="https://github.com/miztiik/$REPO_NAME.git"
 
@@ -85,7 +85,7 @@ function install_libs(){
     # Prepare the server for python3
     yum -y install python-pip python3 git
     yum install -y jq
-    pip3 install boto3 pymongo
+    pip3 install boto3
 }
 
 function install_nodejs(){
@@ -95,93 +95,6 @@ function install_nodejs(){
     nvm install node
     node -e "console.log('Running Node.js ' + process.version)"
 }
-
-function install_mongodb(){
-# db.createUser({ user: 'mongoDbAdmin', pwd: 'Som3thingSh0uldBe1nVault', roles: [{ role: 'read', db:'local'},{ role: 'userAdminAnyDatabase', db:'admin'},{ role: 'dbAdminAnyDatabase', db:'admin'},{ role: 'readWriteAnyDatabase', db:'admin'}]})
-
-cat > '/etc/yum.repos.d/mongodb-org-4.4.repo' << "EOF"
-[mongodb-org-4.4]
-name=MongoDB Repository
-baseurl=https://repo.mongodb.org/yum/amazon/2/mongodb-org/4.4/x86_64/
-gpgcheck=1
-enabled=1
-gpgkey=https://www.mongodb.org/static/pgp/server-4.4.asc
-EOF
-    sudo yum install -y mongodb-org
-
-    sudo systemctl daemon-reload
-    sudo systemctl start mongod
-    sudo systemctl enable mongod
-cat > 'mongo_create_admin_user.js' << "EOF"
-use admin
-db.createUser({ user: "root", pwd: "Som3thingSh0uldBe1nVault", roles: [ { role: "root", db: "admin" } ]})
-db.createUser(
-{
-    user: 'mongodbadmin', 
-    pwd: 'Som3thingSh0uldBe1nVault', 
-    roles: [{ role: 'read', db:'local'},{ role: 'userAdminAnyDatabase', db:'admin'},{ role: 'dbAdminAnyDatabase', db:'admin'},{ role: 'readWriteAnyDatabase', db:'admin'}]}
-)
-use miztiik_db
-db.createUser( 
-{ 
-    user: "dms-user",
-    pwd: "Som3thingSh0uldBe1nVault",
-    roles: [ { role: "read", db: "local" }, "read"] 
-})
-EOF
-
-mongo < mongo_create_admin_user.js
-
-}
-
-function configure_mongodb(){
-# Increasing Ulimits
-echo "* soft nofile 64000" >> /etc/security/limits.conf
-echo "* hard nofile 64000" >> /etc/security/limits.conf
-echo "* soft nproc 32000" >> /etc/security/limits.conf
-echo "* hard nproc 32000" >> /etc/security/limits.conf
-# echo "* soft nproc 32000" >> /etc/security/limits.d/90-nproc.conf
-# echo "* hard nproc 32000" >> /etc/sesucurity/limits.d/90-nproc.conf
-
-# Enabling MongoDB Public Access
-sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/' /etc/mongod.conf
-
-# Creating Admin Users
-# Not the best way, but for a quick demo, this is acceptable?
-# db.updateUser( "reinventuser", {roles: ["readWrite", "dbAdmin"],db: "admin"})
-
-# Enabling Replication
-echo 'replication:
-    replSetName: "rs0"' >> /etc/mongod.conf
-sudo systemctl restart mongod
-cat > 'mongo_pre_load.js' << "EOF"
-rs.initiate( 
-    {
-        _id : "rs0",
-        "version" : 1,
-        members: [
-            { 
-                _id: 0, host: "localhost:27017" 
-            }
-        ]
-    }
-)
-rs.initiate()
-EOF
-
-
-mongo < mongo_pre_load.js
-
-# To Connect Remotely
-# mongo -u kk -p YOUR-PASSWORD PUBLIC-IP/DB-NAME
-# mongo -u mongodbadmin -p Som3thingSh0uldBe1nVault 54.1.151/miztiik_db
-# mongo -u mongodbadmin -p Som3thingSh0uldBe1nVault 10.10.0.25/admin
-# db.changeUserPassword("mongodbadmin@admin", "Som3thingSh0uldBe1nVault")
-
-sudo systemctl restart mongod
-# sudo mongod --replSet "rs0" --dbpath /var/lib/mongo --auth -port 27017 &
-}
-
 
 function install_cw_agent() {
 # Installing AWS CloudWatch Agent FOR AMAZON LINUX RPM
@@ -260,7 +173,5 @@ EOF
 #   exit 1
 
 install_libs
-install_mongodb
-configure_mongodb
 install_cw_agent
 
