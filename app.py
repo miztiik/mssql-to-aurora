@@ -10,8 +10,6 @@ from aws_cdk import core
 app = core.App()
 
 env_MSSQL = core.Environment(region="us-east-1")
-# env_MSSQL = core.Environment(account="8373873873", region="us-east-1")
-
 
 # VPC Stack for hosting Secure API & Other resources
 vpc_stack = VpcStack(
