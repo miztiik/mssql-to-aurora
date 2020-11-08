@@ -147,13 +147,13 @@ class MsSqlOnWindowsEc2Stack(core.Stack):
         )
         output_1 = core.CfnOutput(
             self,
-            "SQLClientPrivateIp",
+            "MS SQL DB PrivateIp",
             value=f"http://{web_app_server.instance_private_ip}",
             description=f"Private IP of SQL Client on EC2"
         )
         output_2 = core.CfnOutput(
             self,
-            "MongoInstance",
+            "MS SQL DB Instance",
             value=(
                 f"https://console.aws.amazon.com/ec2/v2/home?region="
                 f"{core.Aws.REGION}"
